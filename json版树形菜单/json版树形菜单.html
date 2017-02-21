@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			#oUl li ul{
+				display: none;
+			}
+			#oUl li ul.show{
+				display: block;
+			}
+			#oUl li ul.hide{
+				display: none;
+			}
+			#oUl li h3 span{
+				padding: 0px 10px;
+			}
+			#oUl li h3.padL{
+				padding-left: 30px;
+			}
+			li{
+				list-style: none;
+			}
+		</style>
+
+	</head>
+
+<body>
+	<ul id="oUl"></ul>
+</body>
+<script>
+var arr = [
+{
+    title : "第一级菜单",
+    child : [
+    	{title:"第二集菜单"},
+        {title:"第二集菜单",
+        child:[
+        		{title:"第三集菜单"},
+        		{title:"第三集菜单",
+        		child:[
+        			{title:"第四集菜单"},
+        			{title:"第四集菜单"},
+        			{title:"第四集菜单"}
+        		]
+        		},
+        		{title:"第三集菜单"}
+        	]
+    	},
+        {
+        	title:"第二集菜单",
+        	child:[
+        		{title:"第三集菜单"},
+        		{title:"第三集菜单"}
+        	]
+        }
+    ]
+},
+{
+    title : "第一级菜单",
+    child : [
+    	{title:"第二集菜单"},
+        {title:"第二集菜单",
+        child:[
+        		{title:"第三集菜单"},
+        		{title:"第三集菜单",
+        		child:[
+        			{title:"第四集菜单"},
+        			{title:"第四集菜单"},
+        			{title:"第四集菜单"}
+        		]
+        		},
+        		{title:"第三集菜单"}
+        	]
+    	},
+        {
+        	title:"第二集菜单",
+        	child:[
+        		{title:"第三集菜单"},
+        		{title:"第三集菜单"}
+        	]
+        }
+    ]
+},
+{
+	title:"第一级菜单",
+	child:[
+		{title:"第二集菜单"},
+		{title:"第二集菜单"}
+	]
+},
+];
+var oUl = document.getElementById('oUl');
+create(oUl,arr);
+function create(obj,arr){
+	//循环arr渲染第一层
+	arr.forEach(function(e,i,all){
+		var li = document.createElement('li');
+		var h3 = document.createElement('h3');
+		var span = document.createElement('span');
+		//遍历json对象
+		for(var k in e){
+			//给h3加内容
+			h3.innerHTML = e['title'];
+			li.appendChild(h3);
+			//如果k等于child
+			if (k == 'child') {
+				span.innerHTML = '+';
+				h3.appendChild(span);
+				var ul = document.createElement('ul');
+				create(ul,e['child']);
+				li.appendChild(ul);
+			}
+		}
+		h3.onclick = function(){
+			var ul = this.nextElementSibling;
+			if (ul) {
+				if (ul.className !== 'show') {
+					ul.className = 'show';
+					span.innerHTML = '-';
+				} else{
+					ul.className = 'hide';
+					span.innerHTML = '+';
+				}
+			}
+		}
+		obj.appendChild(li);
+	})
+}
+</script>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#box div,#box2 div{width: 200px;height: 100px;border: 1px solid #000;display: none;}
+			#box div.show,#box2 div.show{display: block;}
+			#box .active,#box2 .active{background: yellow;}
+		</style>
+	</head>
+	<body>
+		<div id="box">
+			<input type="button" id="" value="按钮一" class="active"/>
+			<input type="button" id="" value="按钮二" />
+			<input type="button" id="" value="按钮三" />
+			<div class="show">内容一</div>
+			<div>内容二</div>
+			<div>内容三</div>
+		</div>
+		<div id="box2">
+			<input type="button" id="" value="按钮一" class="active"/>
+			<input type="button" id="" value="按钮二" />
+			<input type="button" id="" value="按钮三" />
+			<div class="show">内容一</div>
+			<div>内容二</div>
+			<div>内容三</div>
+		</div>
+		<input type="button" id="btn1" value="第一个开" />
+		<input type="button" id="btn2" value="第二个开，第一个关" />
+		<input type="button" id="btn3" value="第一个开，第二个开" />
+		<input type="button" id="btn4" value="开的关，关的开" />
+		<script type="text/javascript">
+			function Tab(id){
+				this.box = document.getElementById(id);
+				this.divs = this.box.getElementsByTagName('div');
+				this.btns = this.box.getElementsByTagName('input');
+				this.m = 0;
+				this.timer = null;
+			}
+			Tab.prototype.init = function(){
+				var _this = this;
+				for(var i=0;i<this.btns.length;i++){
+					(function(index){
+						_this.btns[index].onclick = function(){
+							clearInterval(_this.timer);
+							_this.clickTab(index);
+							_this.m = index;
+						}
+					})(i)
+				}
+			}
+			Tab.prototype.clickTab = function(n){
+				for(var i=0;i<this.btns.length;i++){
+					this.btns[i].className = '';
+					this.divs[i].className = '';
+				}
+				this.btns[n].className = 'active';
+				this.divs[n].className = 'show';
+			}
+			Tab.prototype.play = function(){
+				var _this = this;
+				clearInterval(this.timer);
+				this.timer = setInterval(function(){
+					_this.m++;
+					_this.clickTab(_this.m %= _this.btns.length);
+				},1000)
+			}
+			Tab.prototype.stop = function(){
+				clearInterval(this.timer);
+			}
+			Tab.prototype.isPlay = function(){
+				return !!this.timer;
+			}
+			var t = new Tab('box');
+			var t2 = new Tab('box2');
+			t.init();
+			t2.init();
+			var btn1 = document.getElementById('btn1');
+			var btn2 = document.getElementById('btn2');
+			var btn3 = document.getElementById('btn3');
+			var btn4 = document.getElementById('btn4');
+			btn1.onclick = function(){
+				t.play();
+			}
+			btn2.onclick = function(){
+				t2.play();
+				t.stop();
+			}
+			btn3.onclick = function(){
+				t2.play();
+				t.play();
+			}
+			btn4.onclick = function(){
+				console.log(t.isPlay())
+				console.log(t2.isPlay())
+				if (t.isPlay()) {
+					t.stop();
+				} else{
+					t.play();
+				}
+				if (t2.isPlay()) {
+					t2.stop();
+				} else{
+					t2.play();
+				}
+			}
+		</script>
+	</body>
+</html>

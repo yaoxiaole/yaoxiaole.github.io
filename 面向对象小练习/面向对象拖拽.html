@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			div{width: 100px;height: 100px;background: red;position:absolute; left:0;top: 0;}
+			#box1{background: yellow;top: 150px;}
+			#box2{background: green;top: 270px;}
+		</style>
+	</head>
+	<body>
+		<div id="box"></div>
+		<div id="box1"></div>
+		<div id="box2"></div>
+		<script type="text/javascript">
+			function Tuo(id){
+				this.box = document.getElementById(id);
+				this.disX = 0;
+				this.disY = 0;
+			}
+			Tuo.prototype.drig = function(){
+				var _this = this;
+				this.box.onmousedown = function(ev){
+					_this.down(ev);
+					ev.preventDefault()
+					document.onmousemove = function(ev){
+						_this.move(ev);
+						ev.preventDefault()
+					}
+					document.onmouseup = function(){
+						_this.up();
+					}
+				}
+			}
+			Tuo.prototype.down = function(xy){
+				this.disX = xy.pageX - this.box.offsetLeft;
+				this.disY = xy.pageY - this.box.offsetTop;
+			}
+			Tuo.prototype.move = function(xy){
+				this.box.style.left = xy.pageX - this.disX +'px';
+				this.box.style.top = xy.pageY - this.disY +'px';
+			}
+			Tuo.prototype.up = function(){
+				document.onmousemove = document.onmouseup = null;
+			}
+			var t = new Tuo('box');
+			var t1 = new Tuo('box1');
+			var t2 = new Tuo('box2');
+			t.drig();
+			t1.drig();
+			t2.drig();
+		</script>
+	</body>
+</html>

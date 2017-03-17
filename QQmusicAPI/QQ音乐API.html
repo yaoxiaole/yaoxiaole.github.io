@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+
+		分析json格式，
+
+		13004
+albummid
+:
+"002jLGWe16Tf1H"
+albumname
+:
+"依然范特西"
+albumname_hilight
+:
+"依然范特西"
+alertid
+:
+2
+chinesesinger
+:
+0
+docid
+:
+"4001185305321443110"
+format
+:
+"qqhq;common;mp3common;wmacommon"
+grp
+:
+Array[3]
+interval
+:
+256
+isonly
+:
+1
+lyric
+:
+""
+lyric_hilight
+:
+""
+media_mid:"003FRy0r0wyGHl"
+msgid:14
+nt:10000
+pay:Object
+preview:Object
+pubtime:1157040000
+pure:0
+singer:Array[2]
+size128:4103315
+size320:10257470
+sizeape:28282607
+sizeflac:28634934
+sizeogg:5868269
+songid:102698215
+songmid:"003FRy0r0wyGHl"
+songname:"千里之外"
+songname_hilight:"<span class="c_tx_highlight">千里之外</span>"
+songurl:"http://y.qq.com/#type=song&id=102698215"
+strMediaMid:"003FRy0r0wyGHl"
+stream:4
+switch:636675
+t:0
+tag:0
+type:0
+ver:0
+vid:"w0013g9qbgt"
+
+		songmid:"003FRy0r0wyGHl"
+		 
+		img=001uqejs3d6EID
+		 
+		lrc=101369814
+		 
+		这些ID在下面的API中会有用的
+		 
+		  
+		 
+		获取播放key：http://c.y.qq.com/base/fcgi-bin/fcg_musicexpress.fcg?json=3&guid={0}    //第二步，请求本地的key值。guid的值可以是任意值
+		这里guid代替原loginUin参数，且这个guid是pgv_pvid这个cookie值,
+		 
+		返回
+		 
+		jsonCallback({"code":0,"sip"["http://ws.stream.qqmusic.qq.com/","http://cc.stream.qqmusic.qq.com/","http://124.14.15.19/streamoc.music.tc.qq.com/"],"key":"6BFDD0DFE8A88C65E5D7942967AE84A1F7BC2A96A9120C15A5032483EA5D0659"});
+		 
+		key=6BFDD0DFE8A88C65E5D7942967AE84A1F7BC2A96A9120C15A5032483EA5D0659
+		 BF12894B358FD0B96D90F2AFF4392BAC02A488A4FC02D9D020134D063828E20E93BAA69DBDC8FEB1A2F72D71E627B7A3E6AFBB4BFD47496B
+		003m1FZE2rkTuH
+		播放歌曲API：http://ws.stream.qqmusic.qq.com/C200{0}.m4a?vkey={1}&guid={pgv_pvid的值，保持和请求vkey时的值一样就OK}&fromtag=30,( {} 里是应该拼接的参数)
+		 
+		{0}=上面取到的ID
+		 
+		{1}=上面取到的KEY
+
+
+        //第三部，此处是歌曲播放的src，
+		 
+		例子：http://cc.stream.qqmusic.qq.com/C200001Js78a40BZU6.m4a?vkey=6BFDD0DFE8A88C65E5D7942967AE84A1F7BC2A96A9120C15A5032483EA5D0659&fromtag=0
+		 
+		歌曲图片API：http://imgcache.qq.com/music/photo/mid_album_90/{1}/{2}/{0}.jpg
+		 
+		{0}=上面取到的Img
+		 
+		{1]=上面取到的Img的倒数第二个字符
+		 
+		{2}=上面取到的Img的最后一个字符
+		
+		albummid:001C2BRX15iE4B 歌曲图片  
+		 
+		例子：http://imgcache.qq.com/music/photo/mid_album_180/4/B/001C2BRX15iE4B.jpg
+		 
+		歌词API：http://music.qq.com/miniportal/static/lyric/{1}/{0}.xml
+		 
+		{0}=上面取到的Lrc
+		 
+		{1}=上面取到的Lrc%100
+		 
+		例子：http://music.qq.com/miniportal/static/lyric/14/101369814.xml
+		 
+		这个LRC有时会失效的
+
+
+		001Js78a40BZU6
+
+        https://c.y.qq.com/soso/fcgi-bin/client_search_cp?qqmusic_ver=1298&remoteplace=txt.yqq.center&searchid=45910627775131910&t=0&aggr=1&cr=1&catZhida=1&lossless=0&flag_qc=0&p=1&n=20&w=%E5%8D%83%E9%87%8C%E4%B9%8B%E5%A4%96&g_tk=237712356&jsonpCallback=searchCallbacksong6643&loginUin=252949842&hostUin=0&format=jsonp&inCharset=utf8&outCharset=utf-8&notice=0&platform=yqq&needNewCode=0 //搜歌接口      第一步，请求歌曲的songmid
+
+		http://music.qq.com/miniportal/player_lyrics.htm?songid=4893051  在线歌词
+        <!-- 003FRy0r0wyGHl -->
+
+        <!-- AB2748B47D2BFBA2D721B27C25734AF023430B9B301EFE51EC31DE6A945834AC82BC83AC5C59C5C397C7E47F2FD327BE71520F61BFAB1EAA -->
+
+	</body>
+</html>

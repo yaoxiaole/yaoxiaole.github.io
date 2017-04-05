@@ -45,19 +45,19 @@ function Music(){
 			img:'images/dzq.jpg',
 			song:'喜欢你',
 			name:'邓紫棋',
-			zj:'妙味课堂'
+			zj:'喜欢你'
 		},
 		{
 			img:'images/ps.jpg',
 			song:'平凡之路',
 			name:'朴树',
-			zj:'妙味课堂'
+			zj:'平凡之路'
 		},
 		{
 			img:'images/zl.jpg',
 			song:'逆流成河',
 			name:'紫菱',
-			zj:'妙味课堂'
+			zj:'逆流成河'
 		}
 	];
 	this.ylBtn = $('.yl');

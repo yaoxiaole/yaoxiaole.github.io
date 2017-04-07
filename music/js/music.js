@@ -334,8 +334,6 @@ Music.prototype = {
 		if (this.musicList.height() <= this.scroll.height()) {
 			this.scrllTop.css('display','none');
 		}else{
-//			var h = this.scrT.height()*this.musicList.height()/this.scroll.height();
-//			this.scrllTop.height(h);
 			this.scrllTop.css('display','block');
 		}
 	},
@@ -346,8 +344,11 @@ Music.prototype = {
 			url:"https://c.y.qq.com/soso/fcgi-bin/client_search_cp?qqmusic_ver=1298&remoteplace=txt.yqq.center&searchid=45910627775131910&t=0&aggr=1&cr=1&catZhida=1&lossless=0&flag_qc=0&g_tk=237712356&jsonpCallback=?&loginUin=252949842&hostUin=0&format=jsonp&inCharset=utf8&outCharset=utf-8&notice=0&platform=yqq&needNewCode=0",
 			dataType:'jsonp',
 			data:{
+				//请求后端字段
 				w:val,
+				//多少页
 				p:num,
+				//返回多少条数据
 				n:7
 			},
 			success:function(data){

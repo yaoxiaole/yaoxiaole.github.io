@@ -29,6 +29,7 @@ function Music(){
 	this.song_drag = $('#song_drag');
 	this.gqbt = $('#gqbt');
 	this.song_lrc = $('#song_lrc');
+	this.songKey = '';
 	//存放歌词
 	this.lrcArr = '';
 	this.scrT = $('.scrT');
@@ -136,6 +137,20 @@ Music.prototype = {
 		this.ylScroll.mousedown(function(ev){
 			_this.ylTuo(ev);
 		});
+		//获取歌曲Key
+		//this.getSongKey();
+	},
+	//获取vKey
+	getSongKey:function(){
+		var _this = this;
+		$.ajax({
+			url:"http://c.y.qq.com/base/fcgi-bin/fcg_musicexpress.fcg?json=3&guid=0?jsonCallback=?",
+			dataType:'jsonp',
+			async:false,   
+			success:function(data){
+				_this.songKey = data.key;
+			}
+		})	
 	},
 	//上一首
 	prveSong:function(){
@@ -342,6 +357,7 @@ Music.prototype = {
 		var _this = this;
 		$.ajax({
 			url:"https://c.y.qq.com/soso/fcgi-bin/client_search_cp?qqmusic_ver=1298&remoteplace=txt.yqq.center&searchid=45910627775131910&t=0&aggr=1&cr=1&catZhida=1&lossless=0&flag_qc=0&g_tk=237712356&jsonpCallback=?&loginUin=252949842&hostUin=0&format=jsonp&inCharset=utf8&outCharset=utf-8&notice=0&platform=yqq&needNewCode=0",
+			//url:"https://c.y.qq.com/soso/fcgi-bin/client_search_cp?ct=24&qqmusic_ver=1298&new_json=1&remoteplace=txt.yqq.song&searchid=61614892212834650&t=0&aggr=1&cr=1&catZhida=1&lossless=0&flag_qc=0&g_tk=10938389&jsonpCallback=&loginUin=931711393&hostUin=0&format=jsonp&inCharset=utf8&outCharset=utf-8&notice=0&platform=yqq&needNewCode=0",
 			dataType:'jsonp',
 			data:{
 				//请求后端字段
@@ -352,6 +368,7 @@ Music.prototype = {
 				n:7
 			},
 			success:function(data){
+				console.log(data)
 				$.each(data.data.song.list, function(index,ele) {
 					_this.searchList.append($(`
 						<li class="clear">
@@ -364,7 +381,7 @@ Music.prototype = {
 				_this.searchList.find('li').off().click(function(){
 					_this.song_lrc.html('暂无歌词');
 					clearInterval(_this.timer);
-					var songID = data.data.song.list[$(this).index()].songmid;
+					var songID = data.data.song.list[$(this).index()].media_mid;
 					var albummid = data.data.song.list[$(this).index()].albummid;
 					var img = 'http://imgcache.qq.com/music/photo/mid_album_180/'+albummid.charAt(12)+'/'+albummid.charAt(13)+'/'+albummid+'.jpg';
 					_this.audio.src = 'http://ws.stream.qqmusic.qq.com/C200'+songID+'.m4a?vkey='+songKey+'&guid=0&fromtag=30';

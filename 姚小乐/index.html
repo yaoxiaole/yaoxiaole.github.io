@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<title>Document</title>
+	<style type="text/css">
+		*{margin: 0;padding: 0;}
+		body{width: 100%;height: 100%;background: url(999.jpg);font-family: "微软雅黑";}
+		.warp{width: 500px;height: 500px;position: absolute;top: 0;left: 0;}
+		.pic{width: 250px;height: 250px;border-radius: 50%;overflow: hidden;margin: 0 auto;}
+		.music{margin: 0px auto;width: 350px;height: 50px;}
+		.text{text-align: center;font-size: 18px;color: peachpuff;}
+		.songText{text-align: center;margin: 20px 0 10px 0;color: paleturquoise;}
+		#audio{position: relative;top: 8px;}
+	</style>
+</head>
+<body>
+	<div class="warp">
+		<div class="pic">
+			<img src="99999.jpg" width="250" height="250"/>
+		</div>
+		<div class="songText">
+			蔡国权-天意人心
+		</div>
+		<div class="music">
+			<img src="prev_song.png" width="15" height="15" id="prev"/>
+			<audio controls="controls" id="audio" loop="loop" autoplay="autoplay" src="http://dl.stream.qqmusic.qq.com/C400000dXeg24ZOlI9.m4a?vkey=B5BA26BA66A2F4FD1FE575DCFA77EB7C67E4A8059EF82E5087754C6D1E1C04755D8CC2FD829A6B1C244B17A97D59560E074D8DD307F82D3E&guid=2282018064&uin=931711393&fromtag=66"></audio>
+			<img src="next_song.png" width="15" height="15" id="next"/>
+		</div>
+		<div class="text">
+			卑几首歌你睇小说时慢慢听。<br />
+			我们是一条有想法的咸鱼。<br />
+			^_^^_^^_^<br/>
+		</div>
+	</div>
+	<script src="jquery-1.8.3-min.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			var song = [
+				'http://dl.stream.qqmusic.qq.com/C400000dXeg24ZOlI9.m4a?vkey=B5BA26BA66A2F4FD1FE575DCFA77EB7C67E4A8059EF82E5087754C6D1E1C04755D8CC2FD829A6B1C244B17A97D59560E074D8DD307F82D3E&guid=2282018064&uin=931711393&fromtag=66',
+				'http://dl.stream.qqmusic.qq.com/C400004Uy5hd0CPJ6v.m4a?vkey=F8BF7099C38029472588B75BCD98367D99B9100DBEF261447D1656C7D7BB3E8E997A78B5177AC027E4AB94EDD5CA0D0626E9FEAD4B6E7D17&guid=2282018064&uin=931711393&fromtag=66',
+				'http://dl.stream.qqmusic.qq.com/C400003rUqYB0RODQd.m4a?vkey=DA2AFABDCC039489A978DAC2EA3A4304A824EBD2961ACD58E9D84696072DDFB7EA7A51E40BE2DB054D82C36038D0A2FDCF6AC8E9B56309D1&guid=2282018064&uin=931711393&fromtag=66'
+			];
+			var songText = ['蔡国权-天意人心','Victory','Go Time'];
+			var n = 0;
+			var m = 0;
+			var t = ($(window).height()-$('.warp').height()) / 2;
+			var l = ($(window).width()-$('.warp').width()) / 2;
+			$('.warp').css({'top':t,'left':l});
+			setInterval(function(){
+				$('.pic').css('transform','rotate('+(m+=4)+'deg)');
+			},100)
+			$('#prev').click(function(){
+				n++;
+				if (n > song.length-1) {
+					n = 0;
+				}
+				$('.songText').html(songText[n]);
+				$('#audio').attr('src',song[n]);
+				$('#audio')[0].play();
+			})
+			$('#next').click(function(){
+				n--;
+				if (n < 0) {
+					n = song.length-1;
+				}
+				$('.songText').html(songText[n]);
+				$('#audio').attr('src',song[n]);
+				$('#audio')[0].play();
+			})
+		})
+	</script>
+</body>
+</html>

@@ -1,0 +1,2 @@
+webpackJsonp([4],{DFsC:function(t,e){},yZHR:function(t,e,n){"use strict";Object.defineProperty(e,"__esModule",{value:!0});var s={render:function(){this.$createElement;this._self._c;return this._m(0)},staticRenderFns:[function(){var t=this.$createElement,e=this._self._c||t;return e("div",[e("h1",[this._v("我是历史记录页面")])])}]};var c=n("VU/8")({data:function(){return{}},methods:{},components:{},computed:{},mounted:function(){}},s,!1,function(t){n("DFsC")},"data-v-49b4037c",null);e.default=c.exports}});
+//# sourceMappingURL=4.422a1062e5af3ad10747.js.map
